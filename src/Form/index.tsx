@@ -2,6 +2,7 @@ import { Container, InfoDiv, Input, InputsDiv, Select } from "./styles";
 import {GrInstagram} from 'react-icons/gr'
 import {FaFacebookF, FaGooglePlusG} from 'react-icons/fa'
 import {TfiLinkedin} from 'react-icons/tfi'
+import { Autocomplete, TextField } from "@mui/material";
 
 export function Form(){
     return(
@@ -39,37 +40,46 @@ export function Form(){
                 <div
                 style={{display: 'flex', flexDirection:'row', width: '100%'}}
                 >
-                <Input type='text' placeholder='Digite seu nome completo!'/>
-                <Input type='email' placeholder='Digite seu E-mail!'/>
+                <TextField id="outlined-basic" label="Digite seu nome completo!" variant="outlined" />
+                <TextField id="outlined-basic" label="Digite seu E-mail!" variant="outlined" type='email' />
                 </div>
                 <div
                  style={{display: 'flex', flexDirection:'row', width: '100%'}}
                 >
-                <Input type='tel' placeholder='Digite seu telefone!'/>
-                <Input type='date' placeholder='Digite seu telefone!'/>
+                <TextField id="outlined-basic" label="Digite seu telefone!" variant="outlined" type='tel' />
+                <TextField id="outlined-basic" variant="outlined" type='date' />
                 </div> 
                 <div
                  style={{display: 'flex', flexDirection:'row', width: '100%'}}
                 >   
-                <Select>
-                    <option value="1">Morumbi</option>
-                </Select>
-                <Select>
-                    <option value="1">Manhã</option>
-                    <option value="1">Tarde</option>
-                    <option value="1">Noite</option>
-                </Select>
+               <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Movie" />}
+                />
+                <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Movie" />}
+                />
                 </div>
                 <h3>Deseja que entremos em contato via telefone?</h3>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
-                <input type="checkbox" name="yes"/>
+                <input type="checkbox" name="yes"
+                defaultChecked={true}/>
                 <label 
                 htmlFor="yes"
                 style={{marginRight: '35px'}}
+                
                 >Sim</label>
-                <input type="checkbox" name="no"/>
+                <input checked={true} type="checkbox" name="no"/>
                 <label htmlFor="no">Não</label>
                 </div>
+                <button>
+                    Enviar
+                </button>
             </InputsDiv>
         </Container>
     );
