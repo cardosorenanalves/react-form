@@ -1,113 +1,208 @@
-import { Container, InfoDiv, InputsDiv } from "./styles";
-import {GrInstagram} from 'react-icons/gr'
-import {FaFacebookF, FaGooglePlusG} from 'react-icons/fa'
-import {TfiLinkedin} from 'react-icons/tfi'
-import { Autocomplete, Button, TextField } from "@mui/material";
+import { useState } from "react";
+import { Container, InputContainer, InputsDiv } from "./styles";
+
+import { Autocomplete, Button, Checkbox, TextField } from "@mui/material";
 import { Bairros } from "../utils/bairros";
+import { DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
+import dayjs, { Dayjs } from "dayjs";
+import { ToastContainer, toast } from "react-toastify";
+import {AiFillCheckCircle } from 'react-icons/ai'
+import { validateEmail } from "../utils/validateEmail";
+import { telefonemask } from "../utils/telefone";
+import { MobileDatePicker } from "@mui/x-date-pickers";
+
 
 
 const period = [{label: 'Manhã'},{label:'Tarde'},{label: 'Noite'}]
-
 export function Form(){
+    const [value, setValue] = useState<Dayjs | null>(
+        dayjs(),
+      );
+    const [name, setName] = useState<string>('');  
+    const [email, setEmail] = useState<string>('');
+    const [tel, setTel] = useState<string>('');
+    const [bairro, setBairro] = useState<string>('');
+    const [disponibilit, setDisponibilit] = useState<string>('');
+    const [checkConfirm, setCheckConfirm] = useState<boolean>(true);
+    const [nameErr, setNameErr] = useState<boolean>(false);  
+    const [emailErr, setEmailErr] = useState<boolean>(false); 
+    const [telErr, setTelErr] = useState<boolean>(false); 
+    const [dateErr, setDateErr] = useState<boolean>(false);
+
+    const handleChange = (newValue: Dayjs | null) => {
+        setValue(newValue);
+      };
+ 
+
+    function handleSubmit(){
+        resetError()
+        if(!name){
+       setNameErr(true)
+        }
+        if(!email || !validateEmail(email)){
+             setEmailErr(true)
+        }
+        if(!tel || telefonemask(tel)?.length as number < 17){
+             setTelErr(true)
+        }
+
+        if(
+            tel 
+            && telefonemask(tel)?.length as number === 17 
+            && email
+            && validateEmail(email)
+            && name
+            ){
+            toast(`Cadastrado com sucesso!`, {progressStyle:{background:'#ed6c02'}});
+            const register = {
+                nome: name,
+                email: email,
+                telefone: tel,
+                dataDeNascimento: value?.format('DD/MM/YYYY'),
+                bairro: bairro ? bairro : "Qualquer",
+                disponibilidade: disponibilit ? disponibilit : 'Qualquer',
+                contatoTel: checkConfirm ? 'Sim' : 'Não'
+            }
+            console.log(register)
+            
+        }
+
+    }
+
+    function resetError(){
+        setNameErr(false)
+        setEmailErr(false)
+        setTelErr(false)
+    }
+
+
     return(
         <Container>  
-                  
-            <InfoDiv>
-                <h2>Contate-Nos:</h2>
-                <p>Nosso endereço:</p>
-                <p>Rua Caio Júlio César, 193 Vila Cardoso Franco - SP</p>
-                <p>E-mail: contato@imobiliaria.com.br</p>
-                <p>{`Telefone: +55 (21) 9 9999-0000`}</p>
-                <h3>Conheça também:</h3>
-                <div>
-                <GrInstagram size={25}
-                style={{marginRight: '15px'}}
+            <ToastContainer
                 />
-                <FaFacebookF size={24}
-                 style={{marginRight: '15px'}}
-                />
-                <TfiLinkedin size={25}
-                 style={{marginRight: '15px'}}
-                />
-                <FaGooglePlusG size={33} 
-                 style={{marginBottom: '-6px'}}
-                />
-                </div>
-            </InfoDiv>
-            <InputsDiv
-            >
-               
-                <h2
+              <InputsDiv>
+                <h3
                 style={{marginBottom: '-10px'}}
-                >Não encontrou o que procurava?</h2>
-                <h4>Preencha o formulário e retornaremos o contato.</h4>
+                >Não encontrou o que procurava?</h3>
+                <h4
+                style={{fontWeight: '400'}}
+                >Preencha o formulário e retornaremos o contato.</h4>
 
-                <div
-                style={{display: 'flex', flexDirection:'row', width: '100%', marginBottom: '15px'}}
-                >
+                <InputContainer>
                 <TextField 
-                label="Digite seu nome completo!" 
+                error={nameErr}
+                helperText={nameErr && 'Digite seu Nome'}
+                label="Digite seu nome completo" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 variant="outlined" 
-                style={{width: '48%', marginRight: '15px'}}
+                size="small"
+                fullWidth
+                color="warning"
                 />
                 <TextField 
-                label="Digite seu E-mail!" 
+                error={emailErr}
+                helperText={emailErr && 'Digite um E-mail valido'}
+                label="Digite seu E-mail" 
                 variant="outlined" 
                 type='email' 
-                style={{width: '48%'}}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                fullWidth
+                size="small"
+                color="warning"
                 />
-                </div>
-                <div
-                 style={{display: 'flex', flexDirection:'row', width: '100%', marginBottom: '15px'}}
+                </InputContainer>
+                <InputContainer
                 >
                 <TextField 
-                label="Digite seu telefone!" 
+                error={telErr}
+                helperText={telErr && 'Digite um telefone valido'}
+                label="Digite seu telefone" 
                 variant="outlined" 
+                value={telefonemask(tel)}
+                onChange={(e) => setTel(e.target.value)}
+                fullWidth
                 type='tel'
-                style={{width: '48%', marginRight: '15px'}}
+                size="small"
+                color="warning"
                 />
-                <TextField 
-                variant="outlined" 
-                type='date' 
-                style={{width: '48%'}}
+                <MobileDatePicker
+                 value={value}
+                 onChange={handleChange}
+                 label="Insira sua data de nascimento"
+                 inputFormat="DD/MM/YYYY"
+                 disableFuture
+                 minDate={dayjs('1922-01-01T21:11:54')}
+                 renderInput={(params) => <TextField
+                 {...params} 
+                 error={dateErr}
+                 helperText={dateErr && 'Selecione uma data valida'}
+                 size='small'
+                 color="warning"
+                 fullWidth
+                />}
                 />
-                </div> 
-                <div
-                 style={{display: 'flex', flexDirection:'row', width: '100%'}}
+                </InputContainer> 
+                <InputContainer
                 >   
                <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 options={Bairros}
-                sx={{ width: 300 }}
-                style={{width: '48%', marginRight: '15px'}}
-                renderInput={(params) => <TextField {...params} label="Selecione o bairro desejado!" />}
+                onChange={(e,value) => setBairro(value?.label as string)}
+                fullWidth
+                renderInput={(params) => <TextField {...params}
+                label="Selecione o bairro desejado" 
+                color="warning"
+                />}
+                size="small"
+                
                 />
                 <Autocomplete
+                
                 disablePortal
                 options={period}
-                id="combo-box-demo"
-                sx={{ width: 300 }}
-                style={{width: '48%'}}
-                renderInput={(params) => <TextField {...params} label="Selecione o melhor período para ser atendido!" />}
+                fullWidth
+                onChange={(e, value)=> setDisponibilit(value?.label as string)}
+                renderInput={(params) => <TextField {...params} 
+                label="Selecione sua disponibilidade"
+                color="warning"
+                />}
+                size="small"
+                
                 />
-                </div>
-                <h3>Deseja que entremos em contato via telefone?</h3>
-                <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
-                <input type="checkbox" name="yes"
-                defaultChecked={true}/>
-                <label 
-                htmlFor="yes"
+                </InputContainer>
+                <h4>Podemos entrar em contato via telefone?</h4>
+                <InputContainer style={{display: 'flex', 
+                flexDirection: 'row', 
+                marginBottom: '10px', 
+                marginTop: '-20px'}}>
+                <Checkbox
+                color="warning"
+                checked={checkConfirm}
+                onClick={()=> setCheckConfirm(!checkConfirm)}
+                />
+                <p          
                 style={{marginRight: '35px'}}
                 
-                >Sim</label>
-                <input checked={true} type="checkbox" name="no"/>
-                <label htmlFor="no">Não</label>
-                </div>
-                <Button variant="outlined">
+                >Sim</p>
+                <Checkbox 
+                checked={checkConfirm === false} 
+                onClick={()=> setCheckConfirm(!checkConfirm)}
+                color="warning"
+                />
+                <p>Não</p>
+                </InputContainer>
+                <Button 
+                size="large"
+                variant="contained"
+                onClick={handleSubmit}
+                >
                     Enviar
                 </Button>
             </InputsDiv>
+
         </Container>
     );
 }

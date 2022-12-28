@@ -1,53 +1,49 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-width: 100%;
-height: 80vh;
+max-width: 100%;
+width: 600px;
+margin: 0 auto;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 align-items: center;
-justify-content: center;
+justify-content: space-between;
+background: ${({ theme }) => theme.colors.white};
+margin-bottom: 30px;
+
 `;
 
 
-
-export const InfoDiv = styled.div`
-margin-right: 130px;
-margin-top: -88px ;
-`;
 
 export const InputsDiv = styled.div`
-width: 1000px;
+width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
 
-`;
 
-export const Input = styled.input`
-all: unset;
+.css-jh47zj-MuiButtonBase-root-MuiButton-root{
+    background-color: #ed6c02 ;
+
+    &:hover{
+        background-color: #E98010 ;
+    }
+}`;
+
+export const InputContainer = styled.div`
+flex: 1;
+display: flex; 
+flex-direction:row; 
+justify-content: center;
 width: 100%;
+margin-bottom: 15px;
+gap:1rem;
 
-margin-bottom: 30px;
-border: 1px solid;
-border-color:${({theme})=> theme.colors.gray700};
-border-radius: 5px;
+@media(max-width: 450px){
+    flex-direction: column;
+    margin-bottom:15px ;
+    width: 90%;
+}
 
-margin-right: 10px;
 
-padding: 10px;
-`;
-
-export const Select = styled.select`
-all: unset;
-width: 100%;
-
-border: 1px solid;
-border-color:${({theme})=> theme.colors.gray700};
-border-radius: 5px;
-
-margin-right: 10px;
-
-padding: 10px;
-`;
-
+`
