@@ -18,7 +18,16 @@ body{
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-    background: ${({ theme }) => theme.colors.gray100}
+    background: ${({ theme }) => theme.colors.white};
+    
+    #root{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    }
 }
+
+
 
 `;
