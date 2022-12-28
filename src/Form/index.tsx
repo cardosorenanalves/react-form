@@ -1,80 +1,39 @@
 import { useState } from "react";
 import { Container, InputContainer, InputsDiv } from "./styles";
 
-import { Autocomplete, Button, Checkbox, TextField } from "@mui/material";
+import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from "@mui/material";
 import { Bairros } from "../utils/bairros";
-import { DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
-import dayjs, { Dayjs } from "dayjs";
-import { ToastContainer, toast } from "react-toastify";
-import {AiFillCheckCircle } from 'react-icons/ai'
-import { validateEmail } from "../utils/validateEmail";
+import dayjs from "dayjs";
+import { ToastContainer, } from "react-toastify";
 import { telefonemask } from "../utils/telefone";
 import { MobileDatePicker } from "@mui/x-date-pickers";
+import { UseForm } from "./useForm";
 
 
 
 const period = [{label: 'Manhã'},{label:'Tarde'},{label: 'Noite'}]
 export function Form(){
-    const [value, setValue] = useState<Dayjs | null>(
-        dayjs(),
-      );
-    const [name, setName] = useState<string>('');  
-    const [email, setEmail] = useState<string>('');
-    const [tel, setTel] = useState<string>('');
-    const [bairro, setBairro] = useState<string>('');
-    const [disponibilit, setDisponibilit] = useState<string>('');
-    const [checkConfirm, setCheckConfirm] = useState<boolean>(true);
-    const [nameErr, setNameErr] = useState<boolean>(false);  
-    const [emailErr, setEmailErr] = useState<boolean>(false); 
-    const [telErr, setTelErr] = useState<boolean>(false); 
-    const [dateErr, setDateErr] = useState<boolean>(false);
-
-    const handleChange = (newValue: Dayjs | null) => {
-        setValue(newValue);
-      };
- 
-
-    function handleSubmit(){
-        resetError()
-        if(!name){
-       setNameErr(true)
-        }
-        if(!email || !validateEmail(email)){
-             setEmailErr(true)
-        }
-        if(!tel || telefonemask(tel)?.length as number < 17){
-             setTelErr(true)
-        }
-
-        if(
-            tel 
-            && telefonemask(tel)?.length as number === 17 
-            && email
-            && validateEmail(email)
-            && name
-            ){
-            toast(`Cadastrado com sucesso!`, {progressStyle:{background:'#ed6c02'}});
-            const register = {
-                nome: name,
-                email: email,
-                telefone: tel,
-                dataDeNascimento: value?.format('DD/MM/YYYY'),
-                bairro: bairro ? bairro : "Qualquer",
-                disponibilidade: disponibilit ? disponibilit : 'Qualquer',
-                contatoTel: checkConfirm ? 'Sim' : 'Não'
-            }
-            console.log(register)
-            
-        }
-
-    }
-
-    function resetError(){
-        setNameErr(false)
-        setEmailErr(false)
-        setTelErr(false)
-    }
-
+   const {
+    nameErr,
+    name,
+    setName,
+    emailErr,
+    email,
+    setEmail,
+    telErr,
+    setTel,
+    tel,
+    value,
+    handleChange,
+    bairro,
+    setBairro,
+    setDisponibilit,
+    disponibilit,
+    checkConfirm,
+    setCheckConfirm,
+    handleSubmit,
+    isLoading
+} = UseForm();
 
     return(
         <Container>  
@@ -136,8 +95,6 @@ export function Form(){
                  minDate={dayjs('1922-01-01T21:11:54')}
                  renderInput={(params) => <TextField
                  {...params} 
-                 error={dateErr}
-                 helperText={dateErr && 'Selecione uma data valida'}
                  size='small'
                  color="warning"
                  fullWidth
@@ -150,22 +107,25 @@ export function Form(){
                 disablePortal
                 id="combo-box-demo"
                 options={Bairros}
+                value={{label: bairro}}
                 onChange={(e,value) => setBairro(value?.label as string)}
                 fullWidth
                 renderInput={(params) => <TextField {...params}
                 label="Selecione o bairro desejado" 
+                value={bairro}
                 color="warning"
                 />}
                 size="small"
                 
                 />
-                <Autocomplete
-                
+                <Autocomplete          
                 disablePortal
                 options={period}
+                value={{label: disponibilit}}
                 fullWidth
                 onChange={(e, value)=> setDisponibilit(value?.label as string)}
                 renderInput={(params) => <TextField {...params} 
+                value={disponibilit}
                 label="Selecione sua disponibilidade"
                 color="warning"
                 />}
@@ -199,7 +159,12 @@ export function Form(){
                 variant="contained"
                 onClick={handleSubmit}
                 >
-                    Enviar
+                  {isLoading ?
+                  <CircularProgress
+                  color="inherit"
+                  size={32}
+                  /> :
+                   'Enviar'}
                 </Button>
             </InputsDiv>
 
