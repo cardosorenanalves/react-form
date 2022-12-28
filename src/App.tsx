@@ -8,7 +8,6 @@ import { CustomFooter } from './components/Footer/Footer';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import ptBR from 'dayjs/locale/pt-br'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
