@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Container, InputContainer, InputsDiv } from "./styles";
 
 import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from "@mui/material";
