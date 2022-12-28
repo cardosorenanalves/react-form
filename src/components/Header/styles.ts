@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const HeaderDiv = styled.div`
-height: 90px;
-width: 100%;
+
+max-width: 100%;
 display: flex;
 align-items: center;
-
-background-color: ${({theme})=> theme.colors.gray500};
+border-bottom: 1px solid;
+border-color:${({theme}) => theme.colors.gray100} ;
+background-color: ${({theme})=> theme.colors.white};
+padding: 15px 0 15px 15px;
 `;
 
 export const LogoImg = styled.img`
 width: 200px;
 height: 69px;
-
-margin-left: 15px
 `
