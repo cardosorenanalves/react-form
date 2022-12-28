@@ -1,18 +1,23 @@
-import { Container, InfoDiv, Input, InputsDiv, Select } from "./styles";
+import { Container, InfoDiv, InputsDiv } from "./styles";
 import {GrInstagram} from 'react-icons/gr'
 import {FaFacebookF, FaGooglePlusG} from 'react-icons/fa'
 import {TfiLinkedin} from 'react-icons/tfi'
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, Button, TextField } from "@mui/material";
+import { Bairros } from "../utils/bairros";
+
+
+const period = [{label: 'Manhã'},{label:'Tarde'},{label: 'Noite'}]
 
 export function Form(){
     return(
         <Container>  
+                  
             <InfoDiv>
                 <h2>Contate-Nos:</h2>
                 <p>Nosso endereço:</p>
-                <p>Rua Caio Júlio César, 193</p>
-                <p>Vila Cardoso Franco - SP</p>
-                <p>{`Telefone: (11) 95072-5538`}</p>
+                <p>Rua Caio Júlio César, 193 Vila Cardoso Franco - SP</p>
+                <p>E-mail: contato@imobiliaria.com.br</p>
+                <p>{`Telefone: +55 (21) 9 9999-0000`}</p>
                 <h3>Conheça também:</h3>
                 <div>
                 <GrInstagram size={25}
@@ -38,16 +43,34 @@ export function Form(){
                 <h4>Preencha o formulário e retornaremos o contato.</h4>
 
                 <div
-                style={{display: 'flex', flexDirection:'row', width: '100%'}}
+                style={{display: 'flex', flexDirection:'row', width: '100%', marginBottom: '15px'}}
                 >
-                <TextField id="outlined-basic" label="Digite seu nome completo!" variant="outlined" />
-                <TextField id="outlined-basic" label="Digite seu E-mail!" variant="outlined" type='email' />
+                <TextField 
+                label="Digite seu nome completo!" 
+                variant="outlined" 
+                style={{width: '48%', marginRight: '15px'}}
+                />
+                <TextField 
+                label="Digite seu E-mail!" 
+                variant="outlined" 
+                type='email' 
+                style={{width: '48%'}}
+                />
                 </div>
                 <div
-                 style={{display: 'flex', flexDirection:'row', width: '100%'}}
+                 style={{display: 'flex', flexDirection:'row', width: '100%', marginBottom: '15px'}}
                 >
-                <TextField id="outlined-basic" label="Digite seu telefone!" variant="outlined" type='tel' />
-                <TextField id="outlined-basic" variant="outlined" type='date' />
+                <TextField 
+                label="Digite seu telefone!" 
+                variant="outlined" 
+                type='tel'
+                style={{width: '48%', marginRight: '15px'}}
+                />
+                <TextField 
+                variant="outlined" 
+                type='date' 
+                style={{width: '48%'}}
+                />
                 </div> 
                 <div
                  style={{display: 'flex', flexDirection:'row', width: '100%'}}
@@ -55,18 +78,22 @@ export function Form(){
                <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                options={Bairros}
                 sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Movie" />}
+                style={{width: '48%', marginRight: '15px'}}
+                renderInput={(params) => <TextField {...params} label="Selecione o bairro desejado!" />}
                 />
                 <Autocomplete
                 disablePortal
+                options={period}
                 id="combo-box-demo"
                 sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Movie" />}
+                style={{width: '48%'}}
+                renderInput={(params) => <TextField {...params} label="Selecione o melhor período para ser atendido!" />}
                 />
                 </div>
                 <h3>Deseja que entremos em contato via telefone?</h3>
-                <div style={{display: 'flex', flexDirection: 'row'}}>
+                <div style={{display: 'flex', flexDirection: 'row', marginBottom: '20px'}}>
                 <input type="checkbox" name="yes"
                 defaultChecked={true}/>
                 <label 
@@ -77,9 +104,9 @@ export function Form(){
                 <input checked={true} type="checkbox" name="no"/>
                 <label htmlFor="no">Não</label>
                 </div>
-                <button>
+                <Button variant="outlined">
                     Enviar
-                </button>
+                </Button>
             </InputsDiv>
         </Container>
     );

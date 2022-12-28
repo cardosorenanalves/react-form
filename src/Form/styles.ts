@@ -2,24 +2,26 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 width: 100%;
-height: 100vh;
+height: 80vh;
 display: flex;
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
+justify-content: center;
 `;
 
+
+
 export const InfoDiv = styled.div`
-margin-left: 6% ;
+margin-right: 130px;
+margin-top: -88px ;
 `;
 
 export const InputsDiv = styled.div`
-width: 45%;
+width: 1000px;
 display: flex;
 flex-direction: column;
 align-items: center;
 
-margin-right: 6%;
 `;
 
 export const Input = styled.input`
@@ -48,3 +50,4 @@ margin-right: 10px;
 
 padding: 10px;
 `;
+
