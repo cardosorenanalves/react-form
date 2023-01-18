@@ -38,15 +38,15 @@ export function CustomFooter(){
                                 style={{marginRight: '18px'}}
                             />
                             <span 
-                            style={{marginTop: '2px'}}
+                                style={{marginTop: '2px'}}
                             >
                                 Imobiliaria
                             </span>
                         </MidiaDiv>
                         <MidiaDiv>
                             <GrGooglePlus 
-                            style={{marginRight: '10px'}}
-                            size={21} 
+                                style={{marginRight: '10px'}}
+                                size={21} 
                             />
                             <span>contato@Imobiliaria.com</span>
                         </MidiaDiv>

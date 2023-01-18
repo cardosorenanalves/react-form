@@ -38,15 +38,15 @@ export function Form(){
             <ToastContainer/>
             <InputsDiv>
                 <h3 
-                style={{marginBottom: '-10px'}}
+                    style={{marginBottom: '-10px'}}
                 >
-                Não encontrou o que procurava?
+                    Não encontrou o que procurava?
                 </h3>
 
                 <h4
-                style={{fontWeight: '400'}}
+                    style={{fontWeight: '400'}}
                 >
-                Preencha o formulário e retornaremos o contato.
+                    Preencha o formulário e retornaremos o contato.
                 </h4>
 
                 <InputContainer>
@@ -97,10 +97,10 @@ export function Form(){
                         minDate={dayjs('1922-01-01T21:11:54')}
                         renderInput={(params) => 
                             <TextField
-                            {...params} 
-                            size='small'
-                            color="warning"
-                            fullWidth
+                                {...params} 
+                                size='small'
+                                color="warning"
+                                fullWidth
                             />}                       
                     />
                 </InputContainer> 
@@ -113,13 +113,14 @@ export function Form(){
                         onChange={(e,value) => setBairro(value as IValue)}
                         fullWidth
                         renderInput={(params) => 
-                            <TextField {...params}
-                            label="Selecione o bairro desejado" 
-                            value={bairro}
-                            color="warning"
+                            <TextField 
+                                {...params}
+                                label="Selecione o bairro desejado" 
+                                value={bairro}
+                                color="warning"
                             />}
                         size="small" 
-                        />
+                    />
                     <Autocomplete          
                         disablePortal
                         options={period}
@@ -127,10 +128,11 @@ export function Form(){
                         fullWidth
                         onChange={(e, value)=> setDisponibilit(value as IValue)}
                         renderInput={(params) => 
-                            <TextField {...params} 
-                            value={disponibilit}
-                            label="Selecione sua disponibilidade"
-                            color="warning"
+                            <TextField
+                                {...params} 
+                                value={disponibilit}
+                                label="Selecione sua disponibilidade"
+                                color="warning"
                             />}
                         size="small"  
                     />
@@ -176,6 +178,7 @@ export function Form(){
                     size="large"
                     variant="contained"
                     onClick={handleSubmit}
+                    color='warning'
                 >
                     { isLoading ?
                         <CircularProgress
