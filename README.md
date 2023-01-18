@@ -25,3 +25,6 @@ na url gerada: http://localhost:3000
 
 Todos os banners solicitados estão localizados na pasta banners na raiz desse projeto 
 
+## Hospedagem
+
+Esse projeto está hospedado e pode ser encontrado no seguinte link: https://cardosorenanalves.github.io/react-form/
