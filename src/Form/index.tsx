@@ -1,7 +1,7 @@
 
 import { Container, InputContainer, InputsDiv } from "./styles";
 
-import { Autocomplete, Button, Checkbox, CircularProgress, TextField } from "@mui/material";
+import { Autocomplete, Button, Checkbox, CircularProgress, FormControlLabel, TextField } from "@mui/material";
 import { Bairros } from "../utils/bairros";
 import dayjs from "dayjs";
 import { ToastContainer, } from "react-toastify";
@@ -51,7 +51,7 @@ export function Form(){
                 <TextField 
                 error={nameErr}
                 helperText={nameErr && 'Digite seu Nome'}
-                label="Digite seu nome completo" 
+                label="Digite seu nome completo *" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 variant="outlined" 
@@ -62,7 +62,7 @@ export function Form(){
                 <TextField 
                 error={emailErr}
                 helperText={emailErr && 'Digite um E-mail valido'}
-                label="Digite seu E-mail" 
+                label="Digite seu E-mail *" 
                 variant="outlined" 
                 type='email' 
                 value={email}
@@ -77,7 +77,7 @@ export function Form(){
                 <TextField 
                 error={telErr}
                 helperText={telErr && 'Digite um telefone valido'}
-                label="Digite seu telefone" 
+                label="Digite seu telefone *" 
                 variant="outlined" 
                 value={telefonemask(tel)}
                 onChange={(e) => setTel(e.target.value)}
@@ -89,7 +89,7 @@ export function Form(){
                 <MobileDatePicker
                  value={value}
                  onChange={handleChange}
-                 label="Insira sua data de nascimento"
+                 label="Insira sua data de nascimento *"
                  inputFormat="DD/MM/YYYY"
                  disableFuture
                  minDate={dayjs('1922-01-01T21:11:54')}
@@ -107,8 +107,8 @@ export function Form(){
                 disablePortal
                 id="combo-box-demo"
                 options={Bairros}
-                value={{label: bairro}}
-                onChange={(e,value) => setBairro(value?.label as string)}
+                value={bairro}
+                onChange={(e,value) => setBairro(value)}
                 fullWidth
                 renderInput={(params) => <TextField {...params}
                 label="Selecione o bairro desejado" 
@@ -121,9 +121,9 @@ export function Form(){
                 <Autocomplete          
                 disablePortal
                 options={period}
-                value={{label: disponibilit}}
+                value={disponibilit}
                 fullWidth
-                onChange={(e, value)=> setDisponibilit(value?.label as string)}
+                onChange={(e, value)=> setDisponibilit(value)}
                 renderInput={(params) => <TextField {...params} 
                 value={disponibilit}
                 label="Selecione sua disponibilidade"
@@ -138,21 +138,28 @@ export function Form(){
                 flexDirection: 'row', 
                 marginBottom: '10px', 
                 marginTop: '-20px'}}>
-                <Checkbox
-                color="warning"
-                checked={checkConfirm}
+               
+                <FormControlLabel
+                control={
+                <Checkbox 
+                checked={checkConfirm} 
                 onClick={()=> setCheckConfirm(!checkConfirm)}
+                color="warning"
                 />
-                <p          
-                style={{marginRight: '35px'}}
-                
-                >Sim</p>
+                }
+                label='Sim'
+                />
+
+                <FormControlLabel
+                control={
                 <Checkbox 
                 checked={checkConfirm === false} 
                 onClick={()=> setCheckConfirm(!checkConfirm)}
                 color="warning"
                 />
-                <p>Não</p>
+                }
+                label='Não'
+                />
                 </InputContainer>
                 <Button 
                 size="large"
