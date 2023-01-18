@@ -44,7 +44,7 @@ export const Bairros = [
     {label:'Cachoeirinha'},
     {label:'Limão'},
     {label:'Brasilândia'},
-    {label:' Freguesia do Ó'},
+    {label:'Freguesia do Ó'},
     {label:'Jaçanã'},
     {label:'Tremembé'},
     {label:'Perus'},
@@ -98,5 +98,5 @@ export const Bairros = [
     {label:'Vila Mariana'},
     {label:'Jardim Elba'},
     {label:'São Roberto'},
-    ]
+    ];
     
