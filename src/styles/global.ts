@@ -21,13 +21,10 @@ body{
     background: ${({ theme }) => theme.colors.white};
     
     #root{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
     }
 }
-
-
-
 `;
