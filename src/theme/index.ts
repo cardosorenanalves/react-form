@@ -1,29 +1,29 @@
 interface ITheme{
     colors: {
-        white: string;
-        black: string;
+      white: string;
+      black: string;
 
-        gray100:string;
-        gray200:string;
-        gray400: string;
-        gray500: string;
-        gray600: string;
-        gray700: string;
-        gray800:string;
-        gray900: string;
+      gray100: string;
+      gray200: string;
+      gray400: string;
+      gray500: string;
+      gray600: string;
+      gray700: string;
+      gray800: string;
+      gray900: string;
 
-        blue500: string;
-        blue200: string;
+      blue500: string;
+      blue200: string; 
 
-        red500: string;
-        red200: string;
-        red100:string;
-      },
-      fonts: {
-        Regular: string;
-        Medium: string;
-        Bold: string;
-      }
+      red500: string;
+      red200: string;
+      red100: string;
+    },
+    fonts: {
+      Regular: string;
+      Medium: string;
+      Bold: string;
+    }
 }
 
 export const theme: ITheme = {
