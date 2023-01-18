@@ -5,7 +5,7 @@ import { HeaderDiv, LogoImg } from './styles';
 export function Header(){
     return(
         <HeaderDiv>
-                <LogoImg src={logo} alt="Logo" />
+            <LogoImg src={logo} alt="Logo" />
         </HeaderDiv>
     );
 }
