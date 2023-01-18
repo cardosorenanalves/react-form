@@ -11,8 +11,8 @@ export function UseForm(){
     const [name, setName] = useState<string>('');  
     const [email, setEmail] = useState<string>('');
     const [tel, setTel] = useState<string>('');
-    const [bairro, setBairro] = useState<string>('');
-    const [disponibilit, setDisponibilit] = useState<string>('');
+    const [bairro, setBairro] = useState<any>({});
+    const [disponibilit, setDisponibilit] = useState<any>({});
     const [checkConfirm, setCheckConfirm] = useState<boolean>(true);
     const [nameErr, setNameErr] = useState<boolean>(false);  
     const [emailErr, setEmailErr] = useState<boolean>(false); 
@@ -64,8 +64,8 @@ export function UseForm(){
             setEmail('');
             setTel('');
             setValue(dayjs());
-            setBairro('')
-            setDisponibilit('');
+            setBairro({})
+            setDisponibilit({});
             setCheckConfirm(true);
             setIsLoading(false)
             }, 2000)
