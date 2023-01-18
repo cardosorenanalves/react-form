@@ -82,6 +82,7 @@ export function Form(){
                         variant="outlined" 
                         value={telefonemask(tel)}
                         onChange={(e) => setTel(e.target.value)}
+                        inputProps={{maxLength: 15}}
                         fullWidth
                         type='tel'
                         size="small"
@@ -146,9 +147,12 @@ export function Form(){
                     <FormControlLabel
                         control={
                             <Checkbox 
-                            checked={checkConfirm} 
-                            onClick={()=> setCheckConfirm(!checkConfirm)}
-                            color="warning"
+                                checked={checkConfirm} 
+                                onClick={()=> {
+                                    !checkConfirm &&
+                                    setCheckConfirm(!checkConfirm);
+                                }}
+                                color="warning"
                             />
                         }
                         label='Sim'
@@ -157,9 +161,12 @@ export function Form(){
                     <FormControlLabel
                         control={
                             <Checkbox 
-                            checked={checkConfirm === false} 
-                            onClick={()=> setCheckConfirm(!checkConfirm)}
-                            color="warning"
+                                checked={checkConfirm === false} 
+                                onClick={()=> {
+                                    checkConfirm &&
+                                    setCheckConfirm(!checkConfirm);
+                                }}
+                                color="warning"
                             />
                         }
                         label='Não'

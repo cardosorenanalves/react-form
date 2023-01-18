@@ -36,14 +36,14 @@ export function UseForm(){
              setEmailErr(true);
              setIsLoading(false);
         }
-        if(!tel || telefonemask(tel)?.length as number < 17){
+        if(!tel || telefonemask(tel)?.length as number < 15){
              setTelErr(true);
              setIsLoading(false);
         }
 
         if(
             tel 
-            && telefonemask(tel)?.length as number === 17 
+            && telefonemask(tel)?.length as number === 15
             && email
             && validateEmail(email)
             && name
@@ -53,8 +53,8 @@ export function UseForm(){
                 email: email,
                 telefone: tel,
                 dataDeNascimento: value?.format('DD/MM/YYYY'),
-                bairro: bairro ? bairro : 'Qualquer',
-                disponibilidade: disponibilit ? disponibilit : 'Qualquer',
+                bairro: bairro.label ? bairro.label : 'Qualquer',
+                disponibilidade: disponibilit.label ? disponibilit.label : 'Qualquer',
                 contatoTel: checkConfirm ? 'Sim' : 'Não'
             };
             console.log(register);
